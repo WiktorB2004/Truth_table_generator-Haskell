@@ -1,7 +1,8 @@
 -- TODO(#1): Make it possible to enter formulas in mathematical way. (=>, /\, \/, <=>)
 -- TODO(#2): Edit the logic so formulas would look like A OPERATOR B instead of OPERATOR A B
-
 -- Module that contains and handles all the logic and operations.
+{-# OPTIONS_GHC -Wno-incomplete-patterns #-}
+{-# OPTIONS_GHC -Wno-incomplete-uni-patterns #-}
 
 module Logic (getTable) where
 
@@ -27,7 +28,7 @@ instance Show ExpBool where
 -- Analyzes syntax of the provided logic formula.
 getExpBool :: String -> ExpBool
 getExpBool [p] =
-  if fromEnum p > 64 && fromEnum p < 123 && p /= 'v'
+  if fromEnum p > 64 && fromEnum p < 123
     then Var p
     else error "Syntax error"
 getExpBool ('(' : xs) =
