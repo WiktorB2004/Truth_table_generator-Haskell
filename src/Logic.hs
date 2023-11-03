@@ -1,3 +1,6 @@
+-- TODO: Make it possible to enter formulas in mathematical way. (=>, /\, \/, <=>)
+-- TODO: Edit the logic so formulas would look like A OPERATOR B instead of OPERATOR A B
+
 -- Module that contains and handles all the logic and operations.
 
 module Logic (getTable) where
@@ -17,7 +20,7 @@ instance Show ExpBool where
   show (Var p) = show p
   show (Not exp1) = "~(" ++ show exp1 ++ ")"
   show (Or exp1 exp2) = "(" ++ show exp1 ++ "v" ++ show exp2 ++ ")"
-  show (And exp1 exp2) = "(" ++ show exp1 ++ "^" ++ show exp2 ++ ")"
+  show (And exp1 exp2) = "(" ++ show exp1 ++ "/\\" ++ show exp2 ++ ")"
   show (Implies exp1 exp2) = "(" ++ show exp1 ++ "=>" ++ show exp2 ++ ")"
   show (Equal exp1 exp2) = "(" ++ show exp1 ++ "<=>" ++ show exp2 ++ ")"
 
