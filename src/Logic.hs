@@ -49,7 +49,7 @@ getExpBool form = case lex form of
     let (exp1, exp2) = clearExpBin rest
      in Equal (getExpBool exp1) (getExpBool exp2)
   [("~", _ : xs)] -> Not (getExpBool xs)
-  [("v", _ : rest)] ->
+  [("\\/", _ : rest)] ->
     let (exp1, exp2) = clearExpBin rest
      in Or (getExpBool exp1) (getExpBool exp2)
   [("/\\", _ : rest)] ->
