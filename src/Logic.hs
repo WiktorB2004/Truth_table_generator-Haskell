@@ -48,6 +48,19 @@ getExpBool form = case lex form of
   [("Equal", _ : rest)] ->
     let (exp1, exp2) = clearExpBin rest
      in Equal (getExpBool exp1) (getExpBool exp2)
+  [("~", _ : xs)] -> Not (getExpBool xs)
+  [("v", _ : rest)] ->
+    let (exp1, exp2) = clearExpBin rest
+     in Or (getExpBool exp1) (getExpBool exp2)
+  [("/\\", _ : rest)] ->
+    let (exp1, exp2) = clearExpBin rest
+     in And (getExpBool exp1) (getExpBool exp2)
+  [("=>", _ : rest)] ->
+    let (exp1, exp2) = clearExpBin rest
+     in Implies (getExpBool exp1) (getExpBool exp2)
+  [("<=>", _ : rest)] ->
+    let (exp1, exp2) = clearExpBin rest
+     in Equal (getExpBool exp1) (getExpBool exp2)
   _ -> error "Sintaxis error"
 
 -- Funtion auxiliar, which clears a logic formula.
