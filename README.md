@@ -1,6 +1,8 @@
 ## File Encryption/Decryption with integrated file explorer in Rust
 Project start date: 2.11.2023
 
+![TTG_Basic](https://github.com/WiktorB2004/truth_table_generator-Haskell/assets/62223421/102a5d8e-1bd9-4b5f-8a18-9da7623f4332)
+
 ## About the project
 Project completed by analysing and using the code from another repo and to eventually add my own functionality.
 Its purpose is to get better about the ideas behind functional programming and practice them to be able to write next project completely by myself 
