@@ -1,7 +1,4 @@
-{-# OPTIONS_GHC -Wno-incomplete-patterns #-}
-{-# OPTIONS_GHC -Wno-incomplete-uni-patterns #-}
 -- Module that contains and handles all the logic and operations.
-{-# OPTIONS_GHC -Wno-unused-top-binds #-}
 
 module Logic (getTable) where
 
@@ -27,7 +24,7 @@ instance Show ExpBool where
 -- Analyzes syntax of the provided logic formula.
 getExpBool :: String -> ExpBool
 getExpBool [p] =
-  if (fromEnum p > 64) && (fromEnum p < 123) && (p /= 'v')
+  if fromEnum p > 64 && fromEnum p < 123 && p /= 'v'
     then Var p
     else error "Syntax error"
 getExpBool ('(' : xs) =
@@ -50,7 +47,7 @@ getExpBool form = case lex form of
      in Equal (getExpBool exp1) (getExpBool exp2)
   _ -> error "Sintaxis error"
 
--- Funtion auxiliar, which clears a propositional logic formula.
+-- Funtion auxiliar, which clears a logic formula.
 clearExpBin :: String -> (String, String)
 clearExpBin (x : xs) =
   if x == '('
@@ -71,10 +68,10 @@ split (x : xs) exp1 stack
         else split xs (exp1 ++ [x]) stack
 
 -- gets Atomics formulae.
-getAtomicsVar :: ExpBool -> [Char]
+getAtomicsVar :: ExpBool -> String
 getAtomicsVar exp1 = noRepeat (getVars exp1)
 
-getVars :: ExpBool -> [Char]
+getVars :: ExpBool -> String
 getVars (Var p) = [p]
 getVars (Not exp1) = getVars exp1
 getVars (Or exp1 exp2) = getVars exp1 ++ getVars exp2
@@ -82,12 +79,62 @@ getVars (And exp1 exp2) = getVars exp1 ++ getVars exp2
 getVars (Implies exp1 exp2) = getVars exp1 ++ getVars exp2
 getVars (Equal exp1 exp2) = getVars exp1 ++ getVars exp2
 
-noRepeat :: [Char] -> [Char]
+noRepeat :: String -> String
 noRepeat [] = []
 noRepeat (x : xs) =
   if x `elem` xs
     then noRepeat xs
     else x : noRepeat xs
 
+-- Form the power set of a list to obtain all interpretations.
+subsuc :: [a] -> [[a]]
+subsuc [] = [[]]
+subsuc (c : xs) = subsuc xs ++ [c : ys | ys <- subsuc xs]
+
+-- Evaluate an interpretation in a logic formula
+evaluate :: ExpBool -> String -> Bool
+evaluate (Var p) vars = p `elem` vars
+evaluate (Not exp1) vars = not (evaluate exp1 vars)
+evaluate (Or exp1 exp2) vars = evaluate exp1 vars || evaluate exp2 vars
+evaluate (And exp1 exp2) vars = evaluate exp1 vars && evaluate exp2 vars
+evaluate (Implies exp1 exp2) vars = not (evaluate exp1 vars) || evaluate exp2 vars
+evaluate (Equal exp1 exp2) vars = evaluate exp1 vars == evaluate exp2 vars
+
+-- Construct the truth table of a propositional logic formula.
 getTable :: String -> String
-getTable str = str
+getTable str =
+  let exp1 = getExpBool str
+   in auxTable exp1 (getAtomicsVar exp1)
+
+auxTable :: ExpBool -> [Char] -> String
+auxTable exp1 vars =
+  let str = show exp1
+   in drawLines (vars ++ str)
+        ++ drawCells vars
+        ++ " "
+        ++ str
+        ++ " |\n"
+        ++ aux2Table exp1 vars (subsuc vars)
+
+aux2Table :: ExpBool -> [Char] -> [[Char]] -> String
+aux2Table _ _ [] = ""
+aux2Table exp1 vars (x : xs) =
+  let values = aux3Table vars x
+   in if evaluate exp1 x
+        then
+          drawLines2 (values ++ "T")
+            ++ drawCells (values ++ "T")
+            ++ "\n"
+            ++ aux2Table exp1 vars xs
+        else
+          drawLines2 (values ++ "F")
+            ++ drawCells (values ++ "F")
+            ++ "\n"
+            ++ aux2Table exp1 vars xs
+
+aux3Table :: [Char] -> [Char] -> [Char]
+aux3Table [] _ = []
+aux3Table (x : xs) inter =
+  if x `elem` inter
+    then 'T' : aux3Table xs inter
+    else 'F' : aux3Table xs inter

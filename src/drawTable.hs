@@ -1,4 +1,4 @@
--- Module for to draw a table.
+-- Module for to draw a table
 module DrawTable
   ( drawCells,
     drawLines,
