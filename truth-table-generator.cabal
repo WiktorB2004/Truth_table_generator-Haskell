@@ -16,7 +16,6 @@ license:        BSD-3-Clause
 build-type:     Simple
 extra-source-files:
     README.md
-    CHANGELOG.md
 
 source-repository head
   type: git
@@ -24,8 +23,10 @@ source-repository head
 
 library
   exposed-modules:
+      DrawTable
       IoHandle
       Logic
+      StackString
   other-modules:
       Paths_truth_table_generator
   autogen-modules:
