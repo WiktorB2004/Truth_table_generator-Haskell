@@ -29,4 +29,5 @@ The decision to adopt Haskell for this project stems from a desire to learn func
 By choosing Haskell, the project aligns with my personal goal of mastering programming concepts. Haskell's emphasis on immutability, pure functions, and strong type system provides an excellent environment to grasp the fundamental principles of functional programming.
 
 - - - -
+Used repo: https://github.com/richardfm77/truthtables/tree/main
 Thank you for exploring this project, and I hope it demonstrates my dedication to the craft of software development and my commitment to delivering high-quality solutions. If you have any questions or would like to collaborate with me, please feel free to get in touch.
