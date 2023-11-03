@@ -1,5 +1,5 @@
 -- TODO(#1): Make it possible to enter formulas in mathematical way. (=>, /\, \/, <=>)
--- TODO: Edit the logic so formulas would look like A OPERATOR B instead of OPERATOR A B
+-- TODO(#2): Edit the logic so formulas would look like A OPERATOR B instead of OPERATOR A B
 
 -- Module that contains and handles all the logic and operations.
 
