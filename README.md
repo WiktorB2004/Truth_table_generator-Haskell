@@ -5,7 +5,7 @@ Project start date: 2.11.2023
 Project completed by analysing and using the code from another repo.
 Its purpose is to get better about the ideas behind functional programming and practice them to be able to write next project completely by myself 
 #### Feature 1: Truth Table Generation
-The core feature of this project is Truth Table Generation. With this application you can  
+The core feature of this project is Truth Table Generation. With this application you can generate truth table for any logic formula in mathematical and written form.
 
 
 ## Why Haskell?
