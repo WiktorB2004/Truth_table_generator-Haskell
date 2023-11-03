@@ -7,6 +7,22 @@ Its purpose is to get better about the ideas behind functional programming and p
 #### Feature 1: Truth Table Generation
 The core feature of this project is Truth Table Generation. With this application you can generate truth table for any logic formula in mathematical and written form.
 
+## User Manual
+- Format: alphabetic characters and operators = Or, And, Implies, Equal, Not
+### Examples
+In: `Or p q`
+Out: `----------------------
+ | p | q | ('p'v'q') |
+ ------------
+ | F | F | F |
+ ------------
+ | F | T | T |
+ ------------
+ | T | F | T |
+ ------------
+ | T | T | T |`
+
+
 
 ## Why Haskell?
 The decision to adopt Haskell for this project stems from a desire to learn functional programming. Haskell serves as an ideal platform to work on this goal.
